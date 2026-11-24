@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SCREENIX — Premium Movie Discovery Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="navbar" id="navbar">
+    <div class="container nav-inner">
+      <div class="brand" id="brandLogo">
+        <h1>SCREEN<span>IX</span></h1>
+      </div>
+
+      <nav class="nav-pill">
+        <button class="nav-item active" data-tab="home">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3l9-8z"/></svg>
+          <span>Home</span>
+        </button>
+        <button class="nav-item" data-tab="movie">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 4v16M17 4v16M2 12h20M2 8h5M2 16h5M17 8h5M17 16h5"/></svg>
+          <span>Movies</span>
+        </button>
+        <button class="nav-item" data-tab="series">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M17 2l-5 5-5-5"/></svg>
+          <span>Shows</span>
+        </button>
+        <button class="nav-item" data-tab="anime">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>Anime</span>
+        </button>
+        <button class="nav-item" data-tab="watchlist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+          <span>Watchlist</span>
+          <span class="nav-badge" id="watchlistCount">0</span>
+        </button>
+
+        <span class="nav-divider"></span>
+
+        <button class="nav-search-trigger" id="searchToggleBtn" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </nav>
+    </div>
+
+    <div class="search-drawer hidden" id="searchDrawer">
+      <div class="container search-drawer-inner">
+        <form class="search-form" id="searchForm">
+          <svg class="search-form-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search movies, series, anime (e.g., Interstellar, Dune, Oppenheimer)..."
+            autocomplete="off"
+          />
+          <button type="submit" class="search-submit-btn">Search</button>
+        </form>
+        <div class="recent-wrap hidden" id="recentWrap">
+          <span class="recent-label">Recent:</span>
+          <div class="recent-chips" id="recentChips"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero-section" id="heroSection">
+    <div class="hero-backdrop" id="heroBackdrop"></div>
+    <div class="hero-vignette"></div>
+
+    <div class="container hero-content" id="heroContent"></div>
+
+    <div class="hero-dots" id="heroDots"></div>
+  </section>
+
+  <main class="container main-section">
+    <div class="section-bar">
+      <div class="section-title-wrap">
+        <h2 id="sectionTitle">Trending Now</h2>
+        <span class="result-count" id="resultCount"></span>
+      </div>
+
+      <div class="explore-controls" id="exploreControls">
+        <span class="explore-label">Explore By:</span>
+        <div class="filter-pills" id="explorePills">
+          <button class="pill active" data-query="Interstellar">All</button>
+          <button class="pill" data-query="Blade Runner">Sci-Fi</button>
+          <button class="pill" data-query="Avengers">Marvel</button>
+          <button class="pill" data-query="Batman">DC &amp; Dark</button>
+          <button class="pill" data-query="John Wick">Action</button>
+        </div>
+
+        <select id="sortSelect" class="sort-select" aria-label="Sort results">
+          <option value="default">Sort: Featured</option>
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+          <option value="az">A - Z</option>
+        </select>
+      </div>
+
+      <button class="btn-outline hidden" id="clearWatchlistBtn">Clear Watchlist</button>
+    </div>
+
+    <div class="movie-grid hidden" id="loadingState">
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+    </div>
+
+    <div class="state-box error-box hidden" id="errorState">
+      <div class="state-icon">!</div>
+      <h3>Unable to Load Titles</h3>
+      <p id="errorMessage">Please check your API key or internet connection.</p>
+      <button class="btn-white" id="retryBtn">Try Again</button>
+    </div>
+
+    <div class="state-box hidden" id="emptyState">
+      <div class="state-icon">🎬</div>
+      <h3 id="emptyTitle">No titles found</h3>
+      <p id="emptyMessage">Try searching with a different keyword or category.</p>
+    </div>
+
+    <div class="movie-grid" id="movieGrid"></div>
+  </main>
+
+  <div class="modal-overlay hidden" id="movieModal" role="dialog" aria-modal="true">
+    <div class="modal-dialog">
+      <button class="modal-close" id="closeModalBtn" aria-label="Close">&times;</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="toast hidden" id="toast"></div>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p><strong>SCREENIX</strong> &mdash; Premium Movie Discovery Platform</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
