@@ -2,11 +2,11 @@
 
 A responsive, API-driven movie and series discovery web application built with **HTML5, CSS3, and Vanilla JavaScript**.
 
-## 🌟 Overview
+##  Overview
 
 **SCREENIX** lets users browse trending titles, search for movies, series, and anime in real time, filter by category, sort results, inspect full title details in a modal, and maintain a personal watchlist and recent search history saved in `localStorage`.
 
-## ✨ Features
+##  Features
 
 * **Real-Time Search & API Integration:** Queries the OMDb REST API using `fetch()` and `async/await` with error handling and retry support.
 
@@ -30,14 +30,14 @@ screenix/
 └── README.md       # Project documentation
 ```
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 * **HTML5**
 * **CSS3** (CSS Variables, Grid, Flexbox, Glassmorphism)
 * **Vanilla JavaScript (ES6+)**
 * **OMDb API** & **Browser `localStorage`**
 
-## 🚀 How to Run Locally
+##  How to Run Locally
 
 1. Clone or download this repository and extract the folder.
 2. Open `script.js` and add your active OMDb API key to `API_KEY` on line 1.
