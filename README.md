@@ -1,4 +1,4 @@
-# 🎬 SCREENIX — Movie & Series Discovery Web App
+#  SCREENIX — Movie & Series Discovery Web App
 
 A responsive, API-driven movie and series discovery web application built with **HTML5, CSS3, and Vanilla JavaScript**.
 
